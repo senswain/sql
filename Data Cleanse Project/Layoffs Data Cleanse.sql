@@ -69,8 +69,9 @@ select  distinct industry
 from layoffs_staging2
 order by 1;
 
-#Crypto industry was also listed as cryptocurrency, the below expression standardizes them both as 'Crypto'
-#United States also requires standardizing
+# Crypto industry was also listed as cryptocurrency, the below expression standardizes them both as 'Crypto'
+# United States also requires standardizing
+	
 select *
 from layoffs_staging2
 where industry like 'crypto%';
@@ -89,7 +90,8 @@ set country = trim(trailing '.' from country)
 where country like 'United States%'
 ;
 
-#Formatting date column & changing date colum from a text colum to a time series column
+# Formatting date column & changing date colum from a text colum to a time series column
+	
 select `date`,
 str_to_date(`date`, '%m/%d/%Y')
 from layoffs_staging2
@@ -104,7 +106,7 @@ alter table layoffs_staging2
 modify column `date` date
 ;
 
-#configuring null values
+# Configuring null values
 
 update layoffs_staging2
 set industry = null
@@ -133,7 +135,7 @@ where total_laid_off is null
 and percentage_laid_off is null
 ;
 
-# deleting redundant data due to lack of necessary data in multiple columns
+# Deleting redundant data due to lack of necessary data in multiple columns
 
 delete
 from layoffs_staging2
